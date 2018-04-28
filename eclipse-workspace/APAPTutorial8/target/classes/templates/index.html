@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html   xmlns:th = "http://www.thymeleaf.org"> 
+<head>
+ <title> Index </title> 
+ <link rel="stylesheet" href="/css/bootstrap.min.css" />
+ 	
+ </head>
+<body>
+ 	<div   th:replace = "fragments/fragment::header" ></div>
+ 	
+ 	<h2 align="center"> Welcome To Tutorial 08 APAP </h2>
+ 	<a   href = "/login" > Login </a>
+ 	<div th:if = "${#httpServletRequest.isUserInRole('USER') || #httpServletRequest.isUserInRole('ADMIN')}" class="col-md-4">
+ 		<form   th:action = "@{/student/view/}"   method = "post" th:object="${student}">
+ 			<div class="form-group">
+				<input type="text" class="form-control" name="npm" />
+				<div >
+					<button type="submit" name="action" value="save">CARI</button>
+				</div>
+			</div> 
+		 </form> 
+	</div>
+ 	
+</body>
+<footer class="footer">
+<div   th:replace = "fragments/fragment :: footer" ></div>
+</footer>
+</html>

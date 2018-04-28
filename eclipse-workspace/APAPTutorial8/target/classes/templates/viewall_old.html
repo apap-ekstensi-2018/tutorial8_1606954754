@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View All Students</title>
+        <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css"/>
+    </head>
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js">
+    </script>
+    <body>
+        <h1>All Students</h1>
+        
+    	<div th:each="student,iterationStatus: ${students}"
+    	th:class="${iterationStatus.odd} ? 'odd'">
+            <h3 th:text="'No. ' + ${iterationStatus.count}">No. 1</h3>
+	       	<h3 th:text="'NPM = ' + ${student.npm}">Student NPM</h3>
+	       	<h3 th:text="'Name = ' + ${student.name}">Student Name</h3>
+	       	<h3 th:text="'GPA = ' + ${student.gpa}">Student GPA</h3>
+	       	<h3 th:text= "${student.gpa>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan!' "></h3>
+	       	<h3 th:if="${student.gpa>=3.49}">Cum Laude!</h3>
+	       	<h3 th:unless="${student.gpa>=3.48}">Sangat Memuaskan!</h3>
+	       	<a th:href="'/student/delete/' + ${student.npm}"> Delete Data </a><br/>
+	       	<a th:href="'/student/update/' + ${student.npm}"> Update Data </a><br/>
+	       	<hr/>
+       	</div>
+    </body>
+</html>

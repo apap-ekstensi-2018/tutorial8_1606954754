@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View All Students</title>
+        <!-- first jQuery -->
+		<script src="/jQuery-3.2.1/jquery-3.2.1.js"></script>
+		<!-- then dataTables -->
+		<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<link href="/DataTables-1.10.16/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />   
+		<script src="/DataTables-1.10.16/js/jquery.dataTables.js"></script>
+    		
+    </head>
+    
+    <body>
+        <h1>All Students Table</h1>
+        <table id="studentTable" class="display">
+        
+	       <thead class="thead-dark">
+	            <tr>
+	                <th>No</th>
+					<th>NPM</th>
+	                <th>Name</th>
+	                <th>GPA</th>
+	                <th>Cum Laude</th>
+	                <th></th>
+	                <th></th>
+	            </tr>
+	        </thead>
+	        
+	        <tbody>
+                <tr th:each="student,iterationStatus: ${students}">
+                		<td th:text="' ' + ${iterationStatus.count}"></td>
+					<td th:text="' ' + ${student.npm}"></td>
+					<td th:text="' ' + ${student.name}"></td>
+					<td th:text="' ' + ${student.gpa}"></td>
+					<td th:text= "${student.gpa>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan!' "></td>
+					<td>
+						<a th:href="'/student/delete/' + ${student.npm}"> 
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</a>
+					</td>
+					<td>
+						<a th:href="'/student/update/' + ${student.npm}"> 
+							<button type="submit" class="btn btn-primary">Update</button>
+						</a>
+					</td>
+					
+                </tr>
+            </tbody>
+           
+    		</table>
+    	<script>
+	    		$(document).ready( function () {
+	    			$('#studentTable').DataTable({
+			        "info":     false
+			    	});
+			} );	
+	</script>
+    </body>
+</html>
